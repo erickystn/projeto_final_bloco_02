@@ -5,6 +5,9 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Categoria } from './categoria/entities/categoria.entity';
 import { Produto } from './produto/entities/produto.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
+import { Usuario } from './usuario/entities/usuario.entity';
 
 @Module({
   imports: [
@@ -12,7 +15,7 @@ import { Produto } from './produto/entities/produto.entity';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       ssl: true,
-      entities: [Categoria,Produto],
+      entities: [Categoria, Produto, Usuario],
       autoLoadEntities: false,
       synchronize: false,
       extra: {
@@ -26,8 +29,11 @@ import { Produto } from './produto/entities/produto.entity';
       },
       logging: true,
     }),
-    ProdutoModule, 
-    CategoriaModule],
+    ProdutoModule,
+    CategoriaModule,
+    AuthModule,
+    UsuarioModule,
+  ],
   controllers: [AppController],
   providers: [],
 })
