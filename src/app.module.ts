@@ -1,10 +1,32 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { ProdutoModule } from './produto/produto.module';
+import { CategoriaModule } from './categoria/categoria.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [],
+  imports: [
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      url: process.env.DATABASE_URL,
+      ssl: true,
+      entities: [],
+      autoLoadEntities: false,
+      synchronize: true,
+      extra: {
+        ssl: {
+          rejectUnauthorized: false,
+        },
+        // Configurações otimizadas para Neon
+        max: 1,
+        connectionTimeoutMillis: 0,
+        idleTimeoutMillis: 30000,
+      },
+      logging: true,
+    }),
+    ProdutoModule, 
+    CategoriaModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
