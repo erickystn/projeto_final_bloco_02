@@ -4,6 +4,7 @@ import { ProdutoModule } from './produto/produto.module';
 import { CategoriaModule } from './categoria/categoria.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Categoria } from './categoria/entities/categoria.entity';
+import { Produto } from './produto/entities/produto.entity';
 
 @Module({
   imports: [
@@ -11,9 +12,9 @@ import { Categoria } from './categoria/entities/categoria.entity';
       type: 'postgres',
       url: process.env.DATABASE_URL,
       ssl: true,
-      entities: [Categoria],
+      entities: [Categoria,Produto],
       autoLoadEntities: false,
-      synchronize: true,
+      synchronize: false,
       extra: {
         ssl: {
           rejectUnauthorized: false,

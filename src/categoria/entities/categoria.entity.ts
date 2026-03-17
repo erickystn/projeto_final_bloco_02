@@ -15,6 +15,6 @@ export class Categoria {
   @Transform((param) => param.value.trim())
   nome: string;
 
-//   @OneToMany(() => Produto, (produto) => produto.categoria)
-//   produtos: Produto[];
+  @OneToMany(() => Produto, (produto) => produto.categoria)
+  produtos: Produto[];
 }
